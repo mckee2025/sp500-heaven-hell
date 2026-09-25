@@ -649,10 +649,6 @@ function copiesHeadline(sentence: string, items: DeskNews[]) {
   });
 }
 
-function offlineReason(quote: Quote) {
-  return marketNarrative(quote, 0);
-}
-
 function uniqueNarrative(quote: Quote, accepted: Map<string, string>) {
   const seed =
     Array.from(quote.symbol).reduce((sum, char, position) => sum + char.charCodeAt(0) * (position + 3), 0) %
