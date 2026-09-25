@@ -6,6 +6,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 const POSTER_SIZE = 800;
 
+const PRODUCTS = [
+  { label: "Earnings Window", href: "https://earning.tutudata.ai" },
+  { label: "Daily Quiz", href: "https://quiz.tutudata.ai" },
+  { label: "VIXInsight", href: "https://vixinsight.com" },
+];
+
 function tickerFromLogo(src: string) {
   try {
     const url = new URL(src);
@@ -183,7 +189,7 @@ export default function HomePage() {
             <span aria-hidden className={loading ? "inline-block animate-spin" : ""}>
               🔄
             </span>
-            刷新今日数据
+            Refresh Data
           </button>
           <button
             type="button"
@@ -192,12 +198,13 @@ export default function HomePage() {
             className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-white/15 bg-white/5 px-4 font-medium text-zinc-100 transition hover:bg-white/10 disabled:cursor-wait disabled:opacity-60"
           >
             <span aria-hidden>📸</span>
-            下载 1:1 高清 PNG 海报
+            Download 1:1 HD Poster
           </button>
         </div>
         <p className="mb-4 text-center font-mono text-[12px] text-zinc-500">{message}</p>
 
         <div
+          id="poster-card"
           className="overflow-hidden shadow-[0_24px_80px_rgba(0,0,0,0.55)]"
           style={{ width: frame, height: frame }}
         >
@@ -212,6 +219,26 @@ export default function HomePage() {
             <BoardCard ref={cardRef} board={board} />
           </div>
         </div>
+
+        <nav
+          aria-label="Tutudata products"
+          className="mt-8 w-full max-w-[800px] rounded-xl border border-slate-800/80 bg-slate-900/60 p-2 backdrop-blur-sm"
+        >
+          <ul className="grid gap-2 sm:grid-cols-3">
+            {PRODUCTS.map((product) => (
+              <li key={product.href}>
+                <a
+                  href={product.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-12 items-center justify-center rounded-lg border border-transparent px-3 text-sm font-semibold tracking-wide text-slate-300 transition duration-200 hover:-translate-y-0.5 hover:border-[#38b6ff]/40 hover:bg-[#38b6ff]/10 hover:text-[#38b6ff] hover:shadow-[0_0_22px_rgba(56,182,255,0.28)]"
+                >
+                  {product.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
     </main>
   );
